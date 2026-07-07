@@ -1,4 +1,7 @@
-# Keil uVision build output
+# Build artifacts
+Objects/
+Listings/
+RTE/
 *.o
 *.d
 *.axf
@@ -9,13 +12,6 @@
 *.dep
 *.build_log.htm
 *.scvd
-
-# IDE temporary/state files
 *.uvguix.*
 *.uvoptx
 *.base@*
-
-# Folders to ignore
-Objects/
-Listings/
-RTE/
