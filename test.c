@@ -67,9 +67,7 @@ __attribute__((naked)) void PendSV_Handler(void) {
     __asm volatile(
         "CPSID I\n"              // Disable interrupts
         
-        "PUSH {R4-R11}\n"        // Push remaining 8 registers
-        
-        // --- SAVE CURRENT TASK CONTEXT ---
+        "PUSH {R4-R11}\n"        
         "LDR R0, =current_task\n"
         "LDR R1, [R0]\n"         // R1 = current_task index (0, 1, or 2)
         "LDR R2, =tasks\n"
@@ -77,12 +75,11 @@ __attribute__((naked)) void PendSV_Handler(void) {
         "ADD R2, R2, R1\n"       // R2 = &tasks[current_task]
         "STR SP, [R2]\n"         // Save current SP into tasks[current_task].sp
         
-        // --- CALL SCHEDULER ---
+
         "PUSH {LR}\n"            // Save the EXC_RETURN number
         "BL scheduler\n"         // Call our C scheduler
         "POP {LR}\n"             // Restore the number
-        
-        // --- LOAD NEXT TASK CONTEXT ---
+   
         "LDR R0, =current_task\n"
         "LDR R1, [R0]\n"         // R1 = new current_task index
         "LDR R2, =tasks\n"
@@ -90,10 +87,10 @@ __attribute__((naked)) void PendSV_Handler(void) {
         "ADD R2, R2, R1\n"       // R2 = &tasks[new current_task]
         "LDR SP, [R2]\n"         // Load new task's SP 
         
-        "POP {R4-R11}\n"         // Pop the 8 manual registers
+        "POP {R4-R11}\n"      
         
         "CPSIE I\n"              // Re-enable interrupts
-        "BX LR\n"                // Hardware auto-pops and resumes task
+        "BX LR\n"                // Hardware auto-pops 
     );
 }
 
@@ -123,11 +120,11 @@ __attribute__((naked)) void os_start(void) {
         "LDR R0, =tasks\n"
         "LDR SP, [R0]\n"         // 1. Point SP to Task 1 stack
         "POP {R4-R11}\n"         // 2. Pop the 8 registers
-        "POP {R0-R3, R12, LR}\n" // 3. Pop the hardware registers (R0 gets &x)
-        "POP {R1}\n"             // 4. Pop the PC (counter1 address) into R1
-        "POP {R2}\n"             // 5. Pop xPSR into R2 (discard it for now)
-        "CPSIE I\n"              // 6. Enable interrupts safely
-        "BX R1\n"                // 7. Jump straight into counter1
+        "POP {R0-R3, R12, LR}\n" // 3. Pop the hardware registers 
+        "POP {R1}\n"             // 4. Pop the PC into R1
+        "POP {R2}\n"             // 5. Pop xPSR into R2 
+        "CPSIE I\n"              // 6. Enable interrupt
+        "BX R1\n"                // 7. Jump to counter1
     );
 }
 
