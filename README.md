@@ -13,6 +13,7 @@ Forging a Stack Frame: To start a task, I had to learn how the CPU actually read
 Inline Assembly & AAPCS Rules: I wrote custom naked functions (__attribute__((naked))) to manually push and pop the software registers (R4-R11). During this, I ran into several HardFaults and had to learn about the ARM Architecture Procedure Call Standard (AAPCS)—specifically how to fix stack misalignment by pushing dummy registers to maintain the strict 8-byte boundary.
 
 # Output
-<img width="1901" height="997" alt="image" src="https://github.com/user-attachments/assets/e04e363a-6ce5-4bb9-8775-de4e6798575d" />
+<img width="1877" height="976" alt="image" src="https://github.com/user-attachments/assets/ec06ea2f-7a5a-490a-8015-bd6afa22f6c6" />
 
-You can see that the global variables x,y are incrementing together, indicating the context switching.
+
+You can see that the global variables x,y,z are incrementing together, indicating the context switching.
