@@ -12,6 +12,10 @@ Forging a Stack Frame: To start a task, I had to learn how the CPU actually read
 
 Inline Assembly & AAPCS Rules: I wrote custom naked functions (__attribute__((naked))) to manually push and pop the software registers (R4-R11). During this, I ran into several HardFaults and had to learn about the ARM Architecture Procedure Call Standard (AAPCS)—specifically how to fix stack misalignment by pushing dummy registers to maintain the strict 8-byte boundary.
 
+processes implemented in the code:    
+I made 3 functions- one increments the argument by 1, the other by 2 and the third by 3. so at any time all the three functions would run simulatneously, hence at any point the 6x=3y=2z.
+
+
 # Output
 <img width="1877" height="976" alt="image" src="https://github.com/user-attachments/assets/ec06ea2f-7a5a-490a-8015-bd6afa22f6c6" />
 
